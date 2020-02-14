@@ -8,7 +8,11 @@ sudo -i -u ec2-user bash << EOF
 if [[ -f /home/ec2-user/SageMaker/.create-notebook ]]; then
     echo "Skipping as currently installing conda env"
 else
+    echo "Updating conda"
+    conda update -n base -c defaults conda -y
     echo "Activate fastai2 conda env"
+    conda init bash
+    source ~/.bashrc
     conda activate /home/ec2-user/SageMaker/.env/fastai2
     echo "Updating python packages from pip"
     pip install feather-format kornia pyarrow wandb nbdev fastprogress fastai2 fastcore --upgrade

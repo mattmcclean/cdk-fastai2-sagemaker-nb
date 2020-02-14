@@ -17,6 +17,8 @@ conda update --all -y
 echo "Starting conda create command for fastai2 env"
 conda create -mqyp /home/ec2-user/SageMaker/.env/fastai2 python=3.7
 echo "Activate fastai2 conda env"
+conda init bash
+source ~/.bashrc
 conda activate /home/ec2-user/SageMaker/.env/fastai2
 echo "Installing python packages from pip"
 pip install feather-format kornia pyarrow wandb nbdev fastprogress fastai2 fastcore --upgrade
