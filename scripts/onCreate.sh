@@ -25,6 +25,7 @@ pip install feather-format kornia pyarrow wandb nbdev fastprogress fastai2 fastc
 pip install torch==1.3.1
 pip install torchvision==0.4.2
 pip install Pillow==6.2.1 --upgrade
+#conda install -c rapidsai -c nvidia -c conda-forge -c defaults cudf=0.12 python=3.7 cudatoolkit=10.0 -y
 conda install ipykernel -y
 echo "Installing Jupyter kernel for fastai2"
 python -m ipykernel install --name 'fastai2' --user

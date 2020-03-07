@@ -16,6 +16,7 @@ else
     conda activate /home/ec2-user/SageMaker/.env/fastai2
     echo "Updating python packages from pip"
     pip install feather-format kornia pyarrow wandb nbdev fastprogress fastai2 fastcore --upgrade
+    pip install torchvision==0.4.2
     echo "Installing Jupyter kernel"
     python -m ipykernel install --name 'fastai2' --user
     echo "Finished setting up Jupyter kernel"
