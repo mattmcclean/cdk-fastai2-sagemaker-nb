@@ -9,8 +9,8 @@ export class Fastaiv2SagemakerNbStack extends cdk.Stack {
     const instanceType = new cdk.CfnParameter(this, 'InstanceType', {
       type: 'String',
       description : 'Enter the SageMaker Notebook instance type',
-      default: 'ml.g4dn.xlarge',
-      allowedValues: [ 'ml.p3.2xlarge', 'ml.p2.xlarge', 'ml.g4dn.xlarge', 'ml.g4dn.2xlarge', 'ml.g4dn.4xlarge' ],
+      default: 'ml.p2.xlarge',
+      allowedValues: [ 'ml.p3.2xlarge', 'ml.p2.xlarge' ],
     });
 
     const volumeSize = new cdk.CfnParameter(this, 'VolumeSize', {
