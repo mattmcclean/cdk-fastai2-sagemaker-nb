@@ -11,6 +11,12 @@ EOF
 cat > /home/ec2-user/SageMaker/.fastai2-install.sh <<\EOF
 #!/bin/bash
 set -e
+echo "Creating dirs and symlinks"
+mkdir -p /home/ec2-user/SageMaker/.cache
+mkdir -p /home/ec2-user/SageMaker/.fastai
+[ ! -L "/home/ec2-user/.cache" ] && ln -s /home/ec2-user/SageMaker/.cache /home/ec2-user/.cache
+[ ! -L "/home/ec2-user/.fastai" ] && ln -s /home/ec2-user/SageMaker/.fastai /home/ec2-user/.fastai
+
 echo "Updating conda"
 conda update -n base -c defaults conda -y
 conda update --all -y
@@ -20,16 +26,20 @@ echo "Activate fastai2 conda env"
 conda init bash
 source ~/.bashrc
 conda activate /home/ec2-user/SageMaker/.env/fastai2
-echo "Installing python packages from pip"
-pip install feather-format kornia pyarrow wandb nbdev fastprogress fastai2 fastcore --upgrade
-pip install torch==1.3.1
-pip install torchvision==0.4.2
-pip install Pillow==6.2.1 --upgrade
-#conda install -c rapidsai -c nvidia -c conda-forge -c defaults cudf=0.12 python=3.7 cudatoolkit=10.0 -y
-conda install ipykernel -y
+echo "Install ipython kernel and widgets"
+conda install ipywidgets ipykernel -y
+echo "Installing fastai2 lib"
+pip install fastai2
+pip install nbdev graphviz azure azure-cognitiveservices-search-imagesearch
 echo "Installing Jupyter kernel for fastai2"
 python -m ipykernel install --name 'fastai2' --user
 echo "Finished installing fastai2 conda env"
+echo "Install Jupyter nbextensions"
+conda activate JupyterSystemEnv
+pip install jupyter_contrib_nbextensions
+jupyter contrib nbextensions install --user
+echo "Restarting jupyter notebook server"
+pkill -f jupyter-notebook
 rm /home/ec2-user/SageMaker/.create-notebook
 echo "Exiting install script"
 EOF

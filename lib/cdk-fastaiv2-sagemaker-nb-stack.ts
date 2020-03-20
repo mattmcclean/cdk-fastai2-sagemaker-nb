@@ -6,15 +6,30 @@ export class Fastaiv2SagemakerNbStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    const instanceType = new cdk.CfnParameter(this, 'InstanceType', {
+      type: 'String',
+      description : 'Enter the SageMaker Notebook instance type',
+      default: 'ml.g4dn.xlarge',
+      allowedValues: [ 'ml.p3.2xlarge', 'ml.p2.xlarge', 'ml.g4dn.xlarge', 'ml.g4dn.2xlarge', 'ml.g4dn.4xlarge' ],
+    });
+
+    const volumeSize = new cdk.CfnParameter(this, 'VolumeSize', {
+      type: 'Number',
+      description : 'Enter the size of the EBS volume attached to the notebook instance',
+      default: 50,
+      minValue: 5,
+      maxValue: 17592,
+    });    
+
     // The code that defines your stack goes here
     /** Create the SageMaker notebook instance */
     new SageMakerNotebook(this, 'Fastai2SagemakerNotebook', {
-      name: 'fastai2',
-      instanceType: 'ml.p3.2xlarge',
+      name: 'fastai-v4',
+      instanceType: instanceType.valueAsString,
       onCreateScript: fs.readFileSync('scripts/onCreate.sh', 'utf8').toString(),
       onStartScript: fs.readFileSync('scripts/onStart.sh', 'utf8').toString(),
-      volumeSize: 50,
-      defaultCodeRepository: "https://github.com/fastai/fastai2",
+      volumeSize: volumeSize.valueAsNumber,
+      defaultCodeRepository: "https://github.com/fastai/course-v4",
     });    
   }
 }
