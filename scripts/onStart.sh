@@ -22,6 +22,12 @@ else
     pip install fastai2 fastcore --upgrade
     echo "Installing Jupyter kernel"
     python -m ipykernel install --name 'fastai2' --user
+    echo "Install Jupyter nbextensions"
+    conda activate JupyterSystemEnv
+    pip install jupyter_contrib_nbextensions
+    jupyter contrib nbextensions install --user
+    echo "Restarting jupyter notebook server"
+    pkill -f jupyter-notebook
     echo "Finished setting up Jupyter kernel"
 fi
 EOF
