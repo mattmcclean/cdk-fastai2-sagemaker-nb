@@ -21,7 +21,7 @@ echo "Updating conda"
 conda update -n base -c defaults conda -y
 conda update --all -y
 echo "Starting conda create command for fastai2 env"
-conda create -mqyp /home/ec2-user/SageMaker/.env/fastai2 python=3.7
+conda create -mqyp /home/ec2-user/SageMaker/.env/fastai2 python=3.6
 echo "Activate fastai2 conda env"
 conda init bash
 source ~/.bashrc
