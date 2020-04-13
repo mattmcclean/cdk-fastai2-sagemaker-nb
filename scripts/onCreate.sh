@@ -30,7 +30,7 @@ echo "Install ipython kernel and widgets"
 conda install ipywidgets ipykernel -y
 echo "Installing fastai2 lib"
 pip install fastai2
-pip install nbdev graphviz azure azure-cognitiveservices-search-imagesearch sagemaker
+pip install nbdev graphviz azure==4.0.0 azure-cognitiveservices-search-imagesearch sagemaker
 echo "Installing Jupyter kernel for fastai2"
 python -m ipykernel install --name 'fastai2' --user
 echo "Finished installing fastai2 conda env"

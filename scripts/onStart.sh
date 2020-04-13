@@ -18,7 +18,7 @@ else
     source ~/.bashrc
     conda activate /home/ec2-user/SageMaker/.env/fastai2
     echo "Updating fastai packages"
-    pip install fastai2 fastcore sagemaker --upgrade
+    pip install fastai2 fastcore sagemaker azure==4.0.0 --upgrade
     echo "Installing Jupyter kernel"
     python -m ipykernel install --name 'fastai2' --user
     echo "Install Jupyter nbextensions"
