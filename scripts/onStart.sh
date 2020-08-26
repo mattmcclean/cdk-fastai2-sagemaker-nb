@@ -13,14 +13,14 @@ else
     ln -s /home/ec2-user/SageMaker/.fastai /home/ec2-user/.fastai
     echo "Updating conda"
     conda update -n base -c defaults conda -y
-    echo "Activate fastai2 conda env"
+    echo "Activate fastai conda env"
     conda init bash
     source ~/.bashrc
-    conda activate /home/ec2-user/SageMaker/.env/fastai2
+    conda activate /home/ec2-user/SageMaker/.env/fastai
     echo "Updating fastai packages"
-    pip install fastai2 fastcore sagemaker azure==4.0.0 --upgrade
+    pip install fastai fastcore sagemaker --upgrade
     echo "Installing Jupyter kernel"
-    python -m ipykernel install --name 'fastai2' --user
+    python -m ipykernel install --name 'fastai' --user
     echo "Install Jupyter nbextensions"
     conda activate JupyterSystemEnv
     pip install jupyter_contrib_nbextensions
